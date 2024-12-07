@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body
+{
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: url('background_1.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.canvas
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 900px;  /* Optional maximum size */
+    max-height: 700px; /* Optional maximum size */
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 5vw; /* Adjusts padding based on viewport width */
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box; /* Ensures padding doesn't push the content outside */
+}
+
+.menu-panel {
+    position: relative;
+    width: 500px;
+    height: 700px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    margin-right: 20px; /* Adds space between the two boxes */
+    box-sizing: border-box;  /* Include border in width and height */
+
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Align items vertically */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px; /* Add padding for spacing */
+
+}
+.animation-properties {
+     transform: translateY(10px);
+}
+
+.box h2{
+    font-size: 1em ;
+    colour: #162938;
+    text-align: left;
+}
+
+.box1{
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; /* Horizontal alignment */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 3px;
+    border-radius: 20px; /* Adjusted for a slimmer look */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), #edf1f4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 255, 255, 0.5); /* Softer shadow */
+    gap: 15px; /* Increase gap between items for better spacing */
+    margin-top: 25px; /* Moves the box further down */
+    height: auto; /* Ensure dynamic height */
+    margin-bottom: -13px; /* Reduces the space between each box */
+    width: 80%;
+
+}
+.box1 label {
+    /*margin: 0; !* Remove default margin *!*/
+    padding-left: 5px;  /* Add left padding to move the text to the right */
+    font-weight: bold;
+    width: 100px; /* Set a fixed width for labels */
+    display: inline-block; /* Ensures the label occupies a block of space */
+    text-align: left; /* Align text within the label to the left */
+    font-size: 14px; /*Set the font*/
+}
+.box1 span {
+    margin-left: 10px; /* Add consistent spacing to the span */
+    width: 40px; /* Optional: Set a fixed width if necessary */
+    text-align: center; /* Center the text inside the span */
+
+}
+
+
+select {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #34a0a4;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    margin-left: -10px; /* Adjust this value to move it to the left */
+}
+
+select:hover {
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    border-color: #34a0a4;
+    background-color: #4a4e69;
+}
+
+
+.range{
+    position: 400px;
+    height: 15px;
+    appearance: none;
+    background: #edf1f4;
+    outline: none;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1),
+    -5px -5px 10px #fff,
+    inset 5px 5px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+.range::-webkit-slider-thumb
+{
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    border: 2px solid #0074cf;
+    box-shadow: -407px 0 0 400px #27a0ff;
+    cursor: pointer;
+}
+#rangeValue, #iterationValue,  #scaleValue,  #speedValue
+{
+    position:relative;
+    text-align: center;
+    width: 45px;
+    background: #27a0ff;
+    border-radius: 25px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.1),
+    -5px -5px 10px #fff,
+    inset 5px 5px 10px rgba(0,0,0,0.1),
+    inset -5px -5px 10px rgba(255,255,255,0.25);
+
+    font-size: 1.00em;
+    font-weight: bold;
+    color: #162938;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.slider
+{
+    margin-top: 1px; /* Decrease spacing above sliders */
+    margin-bottom: 1px; /* Reduce spacing below sliders */
+    font-weight: bold;
+    font-size: medium;
+    color: #ffffff;
+    text-align: left; /* Ensures text is left-aligned */
+
+}
+
+.slider .slide
+{
+    width: 120px;
+    padding-top: 10px;
+}
+
+.color-picker {
+    display: flex; /* Arrange child items in a row */
+    justify-content: center; /* Space items evenly */
+    align-items: center; /* Align items vertically */
+    margin: 5px 0; /* Optional spacing around the container */
+    gap: 8px;
+}
+
+/* Style individual color picker items */
+.color-item {
+    display: flex;
+    flex-direction: column; /* Stack label above the color picker */
+    align-items: center; /* Center align label and color picker */
+    text-align: center; /* Center the label text */
+}
+
+/* Adjust the label style */
+.color-item label {
+    font-size: 14px; /* Adjust font size */
+    margin-bottom: 5px; /* Add spacing between label and color picker */
+    color: inherit; /* Keep text color consistent */
+}
+
+/* Original color picker styles */
+.color-picker input[type="color"] {
+    -webkit-appearance: none; /* Remove default styles in WebKit browsers */
+    appearance: none;
+    width: 35px; /* Adjust width */
+    height: 35px; /* Adjust height */
+    border-radius: 10px; /* Rounded edges */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 0; /* Remove any internal padding */
+    background-color: transparent; /* Ensure the color box is transparent initially */
+    outline: none;
+}
+
+/* Additional WebKit-specific styles */
+.color-picker input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-picker input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
+
+h2:nth-of-type(2) {
+    margin-top: 20px;  /* Adjust this value as needed */
+}
+
+#gradientCheckbox{
+    position: relative;
+    left: -10px; /* Move checkbox to the left */
+}
+
+#animRotateXYCheckbox, #animMoveXCheckbox, #animMoveYCheckbox, #circularRotationCheckbox, #HitandBounceCheckbox{
+    position: relative;
+    left: -20px; /* Move checkbox to the left */
+}
+
+/* Container to center the radio buttons */
+.containerRadio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between radio buttons */
+}
+
+.radio{
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0, 0.25);
+    align-items: center;
+    justify-content: center;
+    /* Move the radio buttons slightly to the right */
+    transform: translateX(90px); /* Adjust this value as needed */
+    margin-top: 10px; /* Adjust this value as needed */
+}
+.checkRadio{
+    display: none;
+}
+
+.radio_label{
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #ffffff;
+    background: #34a0a4;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+.radio_label:not(:last-of-type){
+    border-right: 1px solid #4a4e69 ;
+}
+
+.checkRadio:checked + .radio_label{
+    background: #4a4e69 ;
+}
+#bg-color-picker {
+    cursor: pointer;
+}
+
+/* Style the container to align buttons side by side */
+.button-container {
+    display: flex;               /* Use flexbox to align items */
+    gap: 10px;                   /* Add space between the buttons */
+    justify-content: center;     /* Center the buttons horizontally */
+    align-items: center;         /* Center the buttons vertically */
+}
+
+/* Style for each button */
+#start-btn, #reset-btn, #preview-btn {
+    padding: 5px 10px;          /* Add padding to the buttons */
+    font-size: 16px;             /* Adjust font size */
+    border-radius: 5px;          /* Add rounded corners */
+    border: 2px solid #34a0a4;  /* Border color */
+    background-color: #34a0a4;   /* Background color */
+    color: white;                /* Text color */
+    cursor: pointer;             /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-top:30px;
+}
+
+#start-btn:hover, #reset-btn:hover, #preview-btn:hover{
+    background-color: #4a4e69;  /* Change background color on hover */
+}
+
+@keyframes bounce
+{
+    0%, 20%, 60%, 100%	{transform: translateY(0);}
+    40% 				{transform: translateY(-10px);}
+    80% 				{transform: translateY(-5px);}
+}
+
+/* Style for radio buttons */
+.checkRadio {
+    margin: 0 5px; /* Small space between each radio button */
+    transform: scale(1.2); /* Make radio buttons a bit bigger */
+}
+
+/* Optional: Change the cursor to pointer when hovering over the radio buttons */
+.checkRadio:hover {
+    cursor: pointer;
+}
