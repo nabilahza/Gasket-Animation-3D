@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Gasket Animation</title>
+
+    <!-- Link CSS, JS, and WebGL -->
+    <!-- webgl-utils.js	: standard utilities from Google to set up a WebGL context -->
+    <!-- initShaders.js	: contains helper functions to compile and link WebGL shaders to the application -->
+    <!-- MV.js			: provides matrix and vector manipulation functions APIs for WebGL -->
+    <!-- GasketAnimation.js: your JS file -->
+    <!-- GasketAnimationCSS.css: your CSS file -->
+    <script type="text/javascript" src="Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="Common/initShaders.js"></script>
+    <script type="text/javascript" src="Common/MV.js"></script>
+    <script type="text/javascript" src="GasketAnimation.js"></script>
+    <link rel="stylesheet" type="text/css" href="GasketAnimation.css">
+
+    <!-- Define the vertex shader -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        // Declare the global variable(s) for draw calls
+        uniform mat4 projectionMatrix;
+        uniform mat4 modelViewMatrix;
+
+        // Declare the input variable(s) to receive per-vertex data from the application
+        attribute vec4 vPosition;
+        attribute vec4 vColor;
+        attribute vec2 vTexCoord;
+
+        // Declare the varying variable(s) to pass data to the fragment shader
+        varying vec4 fColor;
+        varying vec2 fTexCoord;
+
+        void main()
+        {
+            gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+            fColor = vColor;
+            fTexCoord = vTexCoord;
+        }
+    </script>
+
+    <!-- Define the fragment shader -->
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec4 fColor;
+        varying vec2 fTexCoord;
+        uniform sampler2D texture;
+
+        void main()
+        {
+            gl_FragColor = fColor * texture2D(texture, fTexCoord);
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="menu-panel">
+    <div class="box">
+        <h2> Gasket Properties: </h2>
+
+        <!--Color picker for color of gasket-->
+        <div class="color-picker">
+            <div class="color-item">
+                <label for="color1" class="colorlabel">Color 1</label>
+                <input type="color" id="color1" class="colorpicker" name="color1" value="#00FFFF">
+            </div>
+            <div class="color-item">
+                <label for="color2" class="colorlabel">Color 2</label>
+                <input type="color" id="color2" class="colorpicker" name="color2" value="#00FF99">
+            </div>
+            <div class="color-item">
+                <label for="color3" class="colorlabel">Color 3</label>
+                <input type="color" id="color3" class="colorpicker" name="color3" value="#00801A">
+            </div>
+            <div class="color-item">
+                <label for="color4" class="colorlabel">Color 4</label>
+                <input type="color" id="color4" class="colorpicker" name="color4" value="#E64D33">
+            </div>
+        </div>
+
+        <!-- Color picker for background color of canvas -->
+        <div class="color-picker">
+            <label for="bg-color-picker">Choose Background Color:</label>
+            <input type="color" id="bg-color-picker" value="#ffffff">
+        </div>
+
+        <!-- Radio button for texture -->
+        <div class="radio">
+            <input class="checkRadio" id ="check-texture-1" type="radio" name="radio">
+            <label class="radio_label" for="check-texture-1">Texture 1</label>
+            <input class="checkRadio" id ="check-texture-2" type="radio" name="radio">
+            <label class="radio_label" for="check-texture-2">Texture 2</label>
+            <input class="checkRadio" id ="check-texture-3" type="radio" name="radio">
+            <label class="radio_label" for="check-texture-3">Texture 3</label>
+        </div>
+
+        <!-- Dropdown list for thematic presets -->
+        <div class="box1">
+            <label style="margin: 0; width: auto; padding-right: 80px;" for="preset-colors">Choose Theme:</label>
+            <select id="preset-colors">
+                <option value="default" data-color1="#00FF00" data-color2="#0000FF" data-color3="#FF0000" data-color4="#E64D33">Default</option>
+                <option value="rainbow" data-color1="#FF0000" data-color2="#00FF00" data-color3="#9400D3" data-color4="#FF7F00">Rainbow</option>
+                <option value="mystic" data-color1="#65081F" data-color2="#B76E79" data-color3="#EFBF04" data-color4="#FF00FF">Mystic Glow</option>
+                <option value="neon" data-color1="#39FF14" data-color2="#1B03A3" data-color3="#FF1493" data-color4="#00FFFF">Neon Lights</option>
+                <option value="dark" data-color1="#101010" data-color2="#202020" data-color3="#303030" data-color4="#404040">Dark Mode</option>
+            </select>
+        </div>
+
+        <!-- Checkbox for color transition -->
+        <div class="box1">
+            <label style="margin: 0; width: auto; padding-right: 90px;" for="gradientCheckbox">Enable Color Transitions:</label>
+            <input type="checkbox" id="gradientCheckbox" />
+
+        </div>
+
+        <!-- Slider for number of subdivisions -->
+        <div class="box1">
+            <label for="subdiv-slider">Number of Subdivisions:</label>
+            <input class="range" id="subdiv-slider" type="range" min="1" max="5" value="3">
+            <span id="rangeValue">3</span>
+        </div>
+
+
+        <h2 class="animation-properties">Animation Properties:</h2>
+        <div class="box1">
+            <label for="iter-slider">Number of Iterations:</label>
+            <input class="range" id="iter-slider" type="range" min="1" max="5" value="1">
+            <span id="iterationValue">1</span>
+        </div>
+
+        <!-- Slider for animation speed -->
+        <div class="box1">
+            <label for="speed-slider">Animation Speed:</label>
+            <input class="range" id="speed-slider" type="range" min="1" max="100" value="60">
+            <span id="speedValue">60</span>
+        </div>
+
+        <!-- Slider for scaling factor of gasket size -->
+        <div class="box1">
+            <label for="scale-slider">Scaling Factor:</label>
+            <input class="range" id="scale-slider" type="range" min="0.5" max="2.0" value="1.0" step="0.01">
+            <span id="scaleValue">1.0</span>
+        </div>
+
+        <!-- Enable Additional Animation -->
+        <div class="box1">
+            <label for="animRotateXYCheckbox">Rotation 360</label>
+            <input type="checkbox" id="animRotateXYCheckbox">
+            <label for="animMoveXCheckbox">Move X-axis</label>
+            <input type="checkbox" id="animMoveXCheckbox">
+            <label for="animMoveYCheckbox">Move Y-axis</label>
+            <input type="checkbox" id="animMoveYCheckbox">
+        </div>
+
+        <!-- Enable Other Additional Animation -->
+        <div class="box1">
+            <label for="circularRotationCheckbox">Circular Rotation</label>
+            <input type="checkbox" id="circularRotationCheckbox">
+            <label for="HitandBounceCheckbox">Hit and Bounce</label>
+            <input type="checkbox" id="HitandBounceCheckbox">
+        </div>
+
+        <!-- Start, Reset and Preview Buttons -->
+        <div class="button-container">
+            <input id="start-btn" type="button" value="Start Animation">
+            <input id="reset-btn" type="button" value="Reset Animation">
+            <input id="preview-btn" type="button" value="Preview Animation">
+        </div>
+    </div>
+</div>
+
+<!-- Canvas for the graphic rendering -->
+<div class="canvas">
+    <canvas id="gl-canvas" width="1280" height="700">
+        Error: your browser doesn't support the HTML5 canvas element
+    </canvas>
+    <img id="texture-1" src="https://i.postimg.cc/kMKrJd9B/BG001.jpg" alt="texture 1" crossOrigin="anonymous" hidden>
+    <img id="texture-2" src="https://i.postimg.cc/05zfT3Fr/BG002.jpg" alt="texture 2" crossOrigin="anonymous" hidden>
+    <img id="texture-3" src="https://i.postimg.cc/15ppPZHR/BG003.jpg" alt="texture 3" crossOrigin="anonymous" hidden>
+</div>
+
+</body>
+
+</html>
