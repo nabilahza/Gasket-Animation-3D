@@ -191,7 +191,7 @@ function getUIElement()
         recompute();
     };
 
-    
+    //monitor the Checkbox and update the Boolean variable based on the checkbox checked or not
     document.getElementById("gradientCheckbox").onchange = function () {
         isColorTransition = this.checked;
     };
@@ -461,7 +461,7 @@ function animUpdate()
 
             break;
 
-        case 2: // Animation 3
+        case 2: // Animation 3: Gradual scaling up 
             scaleNum += 0.02;
 
             if(scaleNum >= 4)
@@ -472,7 +472,7 @@ function animUpdate()
 
             break;
 
-        case 3: // Animation 4
+        case 3: // Animation 4: Gradual scaling down 
             scaleNum -= 0.02;
 
             // When the scale reaches or goes below user-defined scale
@@ -482,7 +482,7 @@ function animUpdate()
             }
             break;
 
-        case 4: // Animation 5
+        case 4: // Animation 5: Diagonal movement (up and right) 
 
             move[0] += 0.006; // X-axis increment
             move[1] += 0.003;  // Y-axis increment
@@ -494,7 +494,7 @@ function animUpdate()
             }
             break;
 
-        case 5: // Animation 6
+        case 5: // Animation 6: Diagonal movement (down and left) 
 
             move[0] -= 0.006; // X-axis decrement
             move[1] -= 0.003;  // Y-axis decrement
@@ -507,7 +507,7 @@ function animUpdate()
             break;
 
 
-        case 6: // Animation 7
+        case 6: // Animation 7: Return to its original position (center) 
             move[0] += 0.006; //X-axis increment
             move[1] += 0.003; //Y-axis increment
 
@@ -871,6 +871,7 @@ function updateAnimationSpeed(speed) {
     setDelta(animSpeed); // the movement of hit and bounce using updated speed
 }
 
+//Set the movement speed for x-axis movement and y-axis movement in circular rotation 
 function setDelta(animSpeed){
     deltaX = animSpeed * Math.cos(Math.PI / 3) * 0.0004;
     deltaY = animSpeed * Math.sin(Math.PI / 3) * 0.0004;
